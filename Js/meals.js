@@ -20,7 +20,7 @@ const displayMeals = meals =>{
         <div onClick='loadMealDetails(${meal.idMeal})' class="card" >
         <img src="${meal.strMealThumb}" class="card-img-top  " alt="...">
         <div class="card-body">
-          <h5 class="card-title">${meal.strMeal}</h5>
+          <h5 class="card-title"> Recipe Name : ${meal.strMeal}</h5>
           <p class="card-text">${meal.strInstructions.slice(0, 150)}</p>
         </div>
       </div>
@@ -44,8 +44,26 @@ const loadMealDetails = (idMeal) =>{
     const url = ` https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
     fetch(url)
     .then(res =>res.json())
-    .then(data => console.log(data.meals[0]))
+    .then(data => displayMealsDetails(data.meals[0]))
 }
-const displayMealsDetails = meal =>{}
 
-loadMeals(' ')
+const displayMealsDetails = meal =>{
+   const detailContainer =document.getElementById('details-container')
+   detailContainer.innerHTML =``
+   const mealDiv = document.createElement('div')
+   mealDiv.classList.add('card')
+   mealDiv.innerHTML =`
+   <div class="card" >
+        <img src="${meal.strMealThumb}" class="card-img-top  " alt="...">
+        <div class="card-body">
+          <h5 class="card-title"> Recipe Name : ${meal.strMeal}</h5>
+         
+          <a href='#' >goooo</a>
+          
+        </div>
+      </div>
+   `
+   detailContainer.appendChild(mealDiv)
+}
+
+
